@@ -17,7 +17,7 @@ BEGIN
         FROM orders
         WHERE id = p_order_id;
         
-        SET v_total = v_total - (v_total * (v_discount / 100));
+    SET v_total = v_total - (v_total * (v_discount / 100));
         
         UPDATE orders
         SET total_amount = v_total
