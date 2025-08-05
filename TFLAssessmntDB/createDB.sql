@@ -1,111 +1,181 @@
-CREATE DATABASE  IF NOT EXISTS enterpriseDB;
+create database assessmentdb;
+use assessmentdb;
 
-USE enterpriseDB;
-
-DROP TABLE IF EXISTS productlines;
-DROP TABLE IF EXISTS products;
-DROP TABLE IF EXISTS offices;
-DROP TABLE IF EXISTS employees;
-DROP TABLE IF EXISTS customers; 
-DROP TABLE IF EXISTS payments;
-DROP TABLE IF EXISTS orders;
-DROP TABLE IF EXISTS orderdetails;
-
-CREATE TABLE productlines (
-  productLine varchar(50),
-  textDescription varchar(4000) DEFAULT NULL,
-  htmlDescription mediumtext,
-  image mediumblob,
-  PRIMARY KEY (productLine)
+CREATE TABLE users(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    aadharid VARCHAR(30) NOT NULL UNIQUE,
+    firstname VARCHAR(50),
+    lastname VARCHAR(50),
+    email VARCHAR(40),
+    contactnumber VARCHAR(40),
+    password VARCHAR(255),  -- Store hashed password
+    createdon DATETIME DEFAULT CURRENT_TIMESTAMP,
+    modifiedon DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE products (
-  productCode varchar(15),
-  productName varchar(70) NOT NULL,
-  productLine varchar(50) NOT NULL,
-  productScale varchar(10) NOT NULL,
-  productVendor varchar(50) NOT NULL,
-  productDescription text NOT NULL,
-  quantityInStock smallint(6) NOT NULL,
-  buyPrice decimal(10,2) NOT NULL,
-  MSRP decimal(10,2) NOT NULL,
-  PRIMARY KEY (productCode),
-  FOREIGN KEY (productLine) REFERENCES productlines (productLine)
+CREATE TABLE roles(
+            id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+            name varchar(20),
+            lob varchar(20)
 );
 
-CREATE TABLE offices (
-  officeCode varchar(10),
-  city varchar(50) NOT NULL,
-  phone varchar(50) NOT NULL,
-  addressLine1 varchar(50) NOT NULL,
-  addressLine2 varchar(50) DEFAULT NULL,
-  state varchar(50) DEFAULT NULL,
-  country varchar(50) NOT NULL,
-  postalCode varchar(15) NOT NULL,
-  territory varchar(10) NOT NULL,
-  PRIMARY KEY (officeCode)
+CREATE TABLE userroles(
+            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            userid INT NOT NULL,
+            roleid INT NOT NULL,
+            CONSTRAINT uc_userroles UNIQUE (userid, roleid),
+            CONSTRAINT fk_userroles_roles FOREIGN KEY(roleid) REFERENCES roles(id) ON UPDATE CASCADE ON DELETE CASCADE,
+            CONSTRAINT fk_userroles_users FOREIGN KEY(userid) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE employees (
-  employeeNumber int,
-  lastName varchar(50) NOT NULL,
-  firstName varchar(50) NOT NULL,
-  extension varchar(10) NOT NULL,
-  email varchar(100) NOT NULL,
-  officeCode varchar(10) NOT NULL,
-  reportsTo int DEFAULT NULL,
-  jobTitle varchar(50) NOT NULL,
-  PRIMARY KEY (employeeNumber),
-  FOREIGN KEY (reportsTo) REFERENCES employees (employeeNumber),
-  FOREIGN KEY (officeCode) REFERENCES offices (officeCode)
+CREATE TABLE employees(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    userId INT,
+	firstname VARCHAR(20) NOT NULL,
+	lastname VARCHAR(20) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	contact VARCHAR(10) NOT NULL
 );
 
-CREATE TABLE customers (
-  customerNumber int,
-  customerName varchar(50) NOT NULL,
-  contactLastName varchar(50) NOT NULL,
-  contactFirstName varchar(50) NOT NULL,
-  phone varchar(50) NOT NULL,
-  addressLine1 varchar(50) NOT NULL,
-  addressLine2 varchar(50) DEFAULT NULL,
-  city varchar(50) NOT NULL,
-  state varchar(50) DEFAULT NULL,
-  postalCode varchar(15) DEFAULT NULL,
-  country varchar(50) NOT NULL,
-  salesRepEmployeeNumber int DEFAULT NULL,
-  creditLimit decimal(10,2) DEFAULT NULL,
-  PRIMARY KEY (customerNumber),
-  FOREIGN KEY (salesRepEmployeeNumber) REFERENCES employees (employeeNumber)
+create table employeeperformance(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	employeeid INT,
+	test VARCHAR(20),
+	communication VARCHAR(20),
+	congition VARCHAR(20),
+	interview VARCHAR(20),
+	CONSTRAINT fk_emp_performance FOREIGN KEY(employeeid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE payments (
-  customerNumber int,
-  checkNumber varchar(50) NOT NULL,
-  paymentDate date NOT NULL,
-  amount decimal(10,2) NOT NULL,
-  PRIMARY KEY (customerNumber,checkNumber),
-  FOREIGN KEY (customerNumber) REFERENCES customers (customerNumber)
+
+CREATE TABLE subjects(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	title VARCHAR(20)
 );
 
-CREATE TABLE orders (
-  orderNumber int,
-  orderDate date NOT NULL,
-  requiredDate date NOT NULL,
-  shippedDate date DEFAULT NULL,
-  status varchar(15) NOT NULL,
-  comments text,
-  customerNumber int NOT NULL,
-  PRIMARY KEY (orderNumber),
-  FOREIGN KEY (customerNumber) REFERENCES customers (customerNumber)
+CREATE TABLE subjectmatterexperts(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	employeeid INT,
+	subjectid INT,
+	certificationdate DATE,
+	CONSTRAINT fk_sme_employees_employeeid FOREIGN KEY(employeeid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_sme_subjects_subjectid FOREIGN KEY(subjectid) REFERENCES subjects(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE orderdetails (
-  orderNumber int,
-  productCode varchar(15) NOT NULL,
-  quantityOrdered int NOT NULL,
-  priceEach decimal(10,2) NOT NULL,
-  orderLineNumber smallint(6) NOT NULL,
-  PRIMARY KEY (orderNumber,productCode),
-  FOREIGN KEY (orderNumber) REFERENCES orders (orderNumber),
-  FOREIGN KEY (productCode) REFERENCES products (productCode)
+CREATE TABLE evaluationcriterias(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	title VARCHAR(20),
+	subjectid INT,
+	CONSTRAINT fk_eval_subjects_subjectid FOREIGN KEY(subjectid) REFERENCES subjects(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+create table questionbank(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	subjectid INT,
+	title VARCHAR(200),
+	a VARCHAR(100),
+	b VARCHAR(100),
+	c VARCHAR(100),
+	d VARCHAR(100),
+	answerkey CHAR,
+	evaluationcriteriaid INT,
+	CONSTRAINT fk_qbank_subjects_subjectid FOREIGN KEY(subjectid) REFERENCES subjects(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_qbank_eval_evalid FOREIGN KEY(evaluationcriteriaid) REFERENCES evaluationcriterias(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+create table tests (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(255),
+	subjectid INT,
+	duration TIME,
+	smeid INT ,
+	creationdate DATETIME,
+	modificationdate DATETIME,
+	scheduleddate DATETIME,
+    passinglevel INT,
+	status ENUM("created","scheduled", "cancelled","conducted")  DEFAULT "created",
+	CONSTRAINT fk_tests_subjects_subjectid FOREIGN KEY(subjectid) REFERENCES subjects(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_tests_sme_smeid FOREIGN KEY(smeid) REFERENCES subjectmatterexperts(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+
+create table testassessmentcriterias(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	testid INT,
+	evaluationcriteriaid INT ,
+	CONSTRAINT fk_as_tests_testid FOREIGN KEY(testid) REFERENCES tests(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_as_evalcriteria_evalcaritid FOREIGN KEY(evaluationcriteriaid) REFERENCES evaluationcriterias(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+create table testquestions(
+	id INT  PRIMARY KEY AUTO_INCREMENT,
+	testid INT,
+	questionbankid INT,
+    CONSTRAINT unique_tests_testquestions UNIQUE KEY(testid,questionbankid), 
+	CONSTRAINT fk_tests_testid FOREIGN KEY(testid) REFERENCES tests(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_testqt_qbank_questionbankid FOREIGN KEY(questionbankid) REFERENCES questionbank(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+create table candidateanswers(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	candidateid INT,
+	testquestionid INT,
+ 	answerkey CHAR,
+	CONSTRAINT fk_emp_candidateid FOREIGN KEY(candidateid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_tstqt_testquestionid FOREIGN KEY(testquestionid) REFERENCES testquestions(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+create table candidatetestresults(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	testid INT,
+	score INT,
+	teststarttime DATETIME,
+	testendtime DATETIME,
+	candidateid INT,
+	CONSTRAINT fk_employees_candid FOREIGN KEY (candidateId) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_test_testid FOREIGN KEY (testid) REFERENCES tests(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+Create table interviews(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	interviewdate DATE,
+    interviewtime VARCHAR(20),
+	smeid INT,
+	candidateid INT,
+	CONSTRAINT fk_sme_smeid FOREIGN KEY(smeid) REFERENCES subjectmatterexperts(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_emp_candtid FOREIGN KEY(candidateid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+Create table interviewcriterias(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	interviewid INT,
+	evaluationcriteriaid INT,
+	CONSTRAINT fk_interviews_interviewid FOREIGN KEY(interviewid) REFERENCES interviews(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_evalriterias_evalcriteaid FOREIGN KEY(evaluationcriteriaid) REFERENCES evaluationcriterias(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+Create table interviewresults(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	interviewcriteriaid INT,
+	ratings INT,
+	comments VARCHAR(200),
+	CONSTRAINT fk_intresults_intcrite_intcriteid FOREIGN KEY(interviewcriteriaid) REFERENCES interviewcriterias(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE testschedules(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    candidateid INT NOT NULL,
+    testid INT NOT NULL,
+    scheduledstart DATETIME NOT NULL,
+    scheduledend DATETIME NOT NULL,
+    status ENUM('Scheduled', 'Started', 'Completed', 'Rescheduled', 'Cancelled') NOT NULL,
+    rescheduledon DATETIME,
+    remarks VARCHAR(255),
+    CONSTRAINT fk_testschedules_candidate FOREIGN KEY (candidateid) REFERENCES employees(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_testschedules_test FOREIGN KEY (testid) REFERENCES tests(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
