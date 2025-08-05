@@ -1,9 +1,7 @@
 CREATE DATABASE  IF NOT EXISTS enterpriseDB;
 
-/* Switch to the classicmodels database */
 USE enterpriseDB;
 
-/* Drop existing tables  */
 DROP TABLE IF EXISTS productlines;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS offices;
@@ -13,7 +11,6 @@ DROP TABLE IF EXISTS payments;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS orderdetails;
 
-/* Create the tables */
 CREATE TABLE productlines (
   productLine varchar(50),
   textDescription varchar(4000) DEFAULT NULL,
