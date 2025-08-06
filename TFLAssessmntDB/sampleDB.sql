@@ -197,3 +197,39 @@ VALUES (
     'a',
     '3'
 );
+
+INSERT INTO questionbank(subjectid, title, a, b, c, d, answerkey, evaluationcriteriaid)
+VALUES (
+    5,
+    'What function is used to change the state in React?',
+    'this.setState()',
+    'this.changeState()',
+    'this.modifyState()',
+    'this.alterState()',
+    'a',
+    '4'
+);
+
+INSERT INTO questionbank(subjectid, title, a, b, c, d, answerkey, evaluationcriteriaid)
+VALUES (
+    6,
+    'Which method is called immediately after a component is inserted into the DOM in React?',
+    'componentDidMount()',
+    'componentWillMount()',
+    'componentDidUpdate()',
+    'componentWillUnmount()',
+    'a',
+    '5'
+);
+
+INSERT INTO questionbank(subjectid, title, a, b, c, d, answerkey, evaluationcriteriaid)
+VALUES (
+    5,
+    'What is JSX in React?',
+    'JavaScript XML',
+    'JavaScript XMLS',
+    'JavaScript XLS',
+    'JavaScript JSX',
+    'a',
+    '6'
+);
