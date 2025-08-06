@@ -269,3 +269,39 @@ VALUES (
     'a',
     '9'
 );
+
+INSERT INTO questionbank(subjectid, title, a, b, c, d, answerkey, evaluationcriteriaid)
+VALUES (
+    4,
+    'What is a characteristic of microservices architecture?',
+    'Monolithic',
+    'Tightly coupled components',
+    'Single, large codebase',
+    'Decentralized and independently deployable services',
+    'd',
+    '9'
+);
+
+INSERT INTO questionbank(subjectid, title, a, b, c, d, answerkey, evaluationcriteriaid)
+VALUES (
+    4,
+    'Which of the following is a benefit of using microservices?',
+    'Centralized management',
+    'High complexity',
+    'Rapid development and deployment',
+    'Tight integration',
+    'c',
+    '10'
+);
+
+INSERT INTO questionbank(subjectid, title, a, b, c, d, answerkey, evaluationcriteriaid)
+VALUES (
+    4,
+    'Which technology is commonly used for inter-service communication in microservices architecture?',
+    'HTTP',
+    'SMTP',
+    'FTP',
+    'SNMP',
+    'a',
+    '10'
+);
