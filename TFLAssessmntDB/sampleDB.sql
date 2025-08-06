@@ -161,3 +161,39 @@ INSERT INTO questionbank(subjectid, title, a, b, c, d, answerkey, evaluationcrit
 INSERT INTO questionbank(subjectid, title, a, b, c, d, answerkey, evaluationcriteriaid) VALUES(5,'Which of the following object is used along with application object in order to ensure that only one process accesses a variable at a time?',' Synchronize',' Synchronize()','ThreadLock','Lock()','a','3');
 
 INSERT INTO questionbank(subjectid, title, a, b, c, d, answerkey, evaluationcriteriaid) VALUES(6,'Which Class is used to make a thread instance explicitly?',' Thread',' ThreadStart','ThreadPool','Runnalble','a','3');
+
+INSERT INTO questionbank(subjectid, title, a, b, c, d, answerkey, evaluationcriteriaid) 
+VALUES (
+    8,
+    'Which of the following is not a valid data type in JavaScript?',
+    'Number',
+    'String',
+    'Boolean',
+    'Float',
+    'd',
+    '1'
+);
+
+INSERT INTO questionbank(subjectid, title, a, b, c, d, answerkey, evaluationcriteriaid)
+VALUES (
+    8,
+    'What does the ''this'' keyword refer to in JavaScript?',
+    'The current function being executed',
+    'The parent function of the current function',
+    'The global object',
+    'The object that invokes the current function',
+    'd',
+    '2'
+    );
+
+INSERT INTO questionbank(subjectid, title, a, b, c, d, answerkey, evaluationcriteriaid)
+VALUES (
+    1,
+    'How do you declare a variable in JavaScript that cannot be reassigned?',
+    'const',
+    'let',
+    'var',
+    'final',
+    'a',
+    '3'
+);
