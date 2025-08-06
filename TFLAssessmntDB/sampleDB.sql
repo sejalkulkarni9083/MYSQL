@@ -233,3 +233,39 @@ VALUES (
     'a',
     '6'
 );
+
+INSERT INTO questionbank(subjectid, title, a, b, c, d, answerkey, evaluationcriteriaid)
+VALUES (
+    6,
+    'In Angular, what does NgModule decorator do?',
+    'It defines a component',
+    'It defines a module',
+    'It defines a service',
+    'It defines a directive',
+    'b',
+    '7'
+);
+
+INSERT INTO questionbank(subjectid, title, a, b, c, d, answerkey, evaluationcriteriaid)
+VALUES (
+    6,
+    'Which Angular feature allows you to subscribe to changes in the router''s navigation events?',
+    'RouterLink',
+    'RouterOutlet',
+    'ActivatedRoute',
+    'RouterEvents',
+    'c',
+    '8'
+);
+
+INSERT INTO questionbank(subjectid, title, a, b, c, d, answerkey, evaluationcriteriaid)
+VALUES (
+    6,
+    'In Angular, what is the purpose of the ''ngOnInit'' lifecycle hook?',
+    'It is called once the component is initialized',
+    'It is called when the component is about to be destroyed',
+    'It is called when there''s an input change to the component',
+    'It is called when there''s an output change from the component',
+    'a',
+    '9'
+);
