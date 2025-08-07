@@ -343,3 +343,44 @@ INSERT INTO testquestions(testid, questionbankid)VALUES(1,7);
 INSERT INTO testquestions(testid, questionbankid)VALUES(1,8);
 INSERT INTO testquestions(testid, questionbankid)VALUES(1,9);
 INSERT INTO testquestions(testid, questionbankid)VALUES(1,10);
+
+-- Second Test
+-- Create test2 with 10 questions
+INSERT INTO testquestions(testid, questionbankid)VALUES(2,5);
+
+INSERT INTO testquestions(testid, questionbankid)VALUES(2,6);
+INSERT INTO testquestions(testid, questionbankid)VALUES(2,8);
+INSERT INTO testquestions(testid, questionbankid)VALUES(2,7);
+INSERT INTO testquestions(testid, questionbankid)VALUES(2,9);
+INSERT INTO testquestions(testid, questionbankid)VALUES(2,16);
+INSERT INTO testquestions(testid, questionbankid)VALUES(2,17);
+INSERT INTO testquestions(testid, questionbankid)VALUES(2,18);
+INSERT INTO testquestions(testid, questionbankid)VALUES(2,19);
+INSERT INTO testquestions(testid, questionbankid)VALUES(2,20);
+ 
+
+
+-- Create test3 with 10 questions
+INSERT INTO testquestions(testid, questionbankid)VALUES(3,15);
+INSERT INTO testquestions(testid, questionbankid)VALUES(3,16);
+INSERT INTO testquestions(testid, questionbankid)VALUES(3,23);
+INSERT INTO testquestions(testid, questionbankid)VALUES(3,5);
+INSERT INTO testquestions(testid, questionbankid)VALUES(3,6);
+INSERT INTO testquestions(testid, questionbankid)VALUES(3,20);
+INSERT INTO testquestions(testid, questionbankid)VALUES(3,27);
+INSERT INTO testquestions(testid, questionbankid)VALUES(3,28);
+INSERT INTO testquestions(testid, questionbankid)VALUES(3,29);
+INSERT INTO testquestions(testid, questionbankid)VALUES(3,30);
+
+-- Create test8 with 10 questions
+
+INSERT INTO testquestions(testid, questionbankid)VALUES(8,21);
+INSERT INTO testquestions(testid, questionbankid)VALUES(8,22);
+INSERT INTO testquestions(testid, questionbankid)VALUES(8,23);
+INSERT INTO testquestions(testid, questionbankid)VALUES(8,24);
+INSERT INTO testquestions(testid, questionbankid)VALUES(8,25);
+INSERT INTO testquestions(testid, questionbankid)VALUES(8,26);
+INSERT INTO testquestions(testid, questionbankid)VALUES(8,27);
+INSERT INTO testquestions(testid, questionbankid)VALUES(8,28);
+INSERT INTO testquestions(testid, questionbankid)VALUES(8,29);
+INSERT INTO testquestions(testid, questionbankid)VALUES(8,30);
