@@ -316,3 +316,30 @@ VALUES
 ('Full-Length Programming Test', 4, "01:30:00", 2, '2023-09-05', '2023-10-10', '2024-01-18', 5, 'scheduled'),
 ('Quick Aptitude Test', 7, "00:30:00", 7, '2025-01-01', '2025-01-01', '2025-01-10', 6, 'scheduled'),
 ('Logical Reasoning Test', 7, "00:30:00", 7, '2024-01-01', '2024-01-01', '2024-01-10', 7, 'created');
+
+INSERT INTO testassessmentcriterias(testid, evaluationcriteriaid)VALUES(1,4);
+INSERT INTO testassessmentcriterias(testid, evaluationcriteriaid)VALUES(1,2);
+INSERT INTO testassessmentcriterias(testid, evaluationcriteriaid)VALUES(2,2);
+INSERT INTO testassessmentcriterias(testid, evaluationcriteriaid)VALUES(2,4);
+INSERT INTO testassessmentcriterias(testid, evaluationcriteriaid)VALUES(1,3);
+INSERT INTO testassessmentcriterias(testid, evaluationcriteriaid)VALUES(5,4);
+INSERT INTO testassessmentcriterias(testid, evaluationcriteriaid)VALUES(2,3);
+INSERT INTO testassessmentcriterias(testid, evaluationcriteriaid)VALUES(1,5);
+INSERT INTO testassessmentcriterias(testid, evaluationcriteriaid)VALUES(3,1);
+INSERT INTO testassessmentcriterias(testid, evaluationcriteriaid)VALUES(4,5);
+INSERT INTO testassessmentcriterias(testid, evaluationcriteriaid)VALUES(7,8);
+INSERT INTO testassessmentcriterias(testid, evaluationcriteriaid)VALUES(8,8);
+
+
+-- Create test1 with 10 questions
+
+INSERT INTO testquestions(testid, questionbankid)VALUES(1,1);
+INSERT INTO testquestions(testid, questionbankid)VALUES(1,2);
+INSERT INTO testquestions(testid, questionbankid)VALUES(1,3);
+INSERT INTO testquestions(testid, questionbankid)VALUES(1,4);
+INSERT INTO testquestions(testid, questionbankid)VALUES(1,5);
+INSERT INTO testquestions(testid, questionbankid)VALUES(1,6);
+INSERT INTO testquestions(testid, questionbankid)VALUES(1,7);
+INSERT INTO testquestions(testid, questionbankid)VALUES(1,8);
+INSERT INTO testquestions(testid, questionbankid)VALUES(1,9);
+INSERT INTO testquestions(testid, questionbankid)VALUES(1,10);
