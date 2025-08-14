@@ -117,6 +117,8 @@ update tests set duration=@duration where id=@assessmentId;
 -- this query is for changing the scheduleddate of particular tests
 update tests set scheduleddate=@scheduledDate where id=@assessmentId;
 
+
+
 -- get all questions from questionbank
 select * from questionbank;
 
