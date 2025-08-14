@@ -119,3 +119,37 @@ update tests set scheduleddate=@scheduledDate where id=@assessmentId;
 
 -- get all questions from questionbank
 select * from questionbank;
+
+-- this query gives the question where subjectid=1
+select questionbank.id as questionid, questionbank.title as question, subjects.title as subject,
+ subjects.id as subjectid from questionbank, subjects 
+ where questionbank.subjectid=subjects.id and subjects.id=1;
+ 
+--  this query gives the questions where subjectid=1 and criteriaid=1;
+select questionbank.id, questionbank.title, subjects.title as subject ,evaluationcriterias.title as criteria
+from questionbank, subjects,evaluationcriterias
+where questionbank.subjectid=subjects.id and questionbank.evaluationcriteriaid=evaluationcriterias.id
+and subjects.id=1 and evaluationcriterias.id=1;
+
+-- this query is for changing the answerkey of particular question
+update questionbank set answerkey="a" where id =1;
+
+-- this query gives the question where questionid=1
+select * from questionbank where id=1;
+
+-- this query is for updating a question
+update questionbank set title=@title,a=@a,b=@b,c=@c,d=@d,answerkey=@answerKey where id =1;
+
+-- this query is for changing evaluationcriteriaid and subjectid where questionid=1
+update questionbank set evaluationcriteriaid=1 ,subjectid=1 where id =1;
+
+-- this query give the score of candidate where candidateid=1 and testid=3;
+select score from candidatetestresults where candidateid=1 and testid=3;
+
+-- get the candidatetestresultdetails
+select candidatetestresults.testid,candidatetestresults.score,candidatetestresults.candidateid,
+employees.firstname,employees.lastname,subjects.title as subject
+from candidatetestresults inner join employees
+on employees.id=candidatetestresults.candidateid inner join tests
+on candidatetestresults.testid=tests.id inner join subjects
+on tests.subjectid=subjects.id where candidatetestresults.testid=3;
