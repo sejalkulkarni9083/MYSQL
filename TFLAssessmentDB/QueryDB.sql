@@ -175,3 +175,19 @@ from tests
 inner join candidatetestresults on tests.id=candidatetestresults.testid
 inner join employees on candidatetestresults.candidateid=employees.id
 where candidatetestresults.score < tests.passinglevel AND tests.id=1;
+
+-- get the candidateanswers and correctanswers
+select candidateanswers.testquestionid,testquestions.testid,
+candidateanswers.answerkey as candidateanswer,questionbank.answerkey
+from  candidateanswers
+INNER JOIN   testquestions  on testquestions.questionbankid=candidateanswers.testquestionid
+INNER JOIN   questionbank on questionbank.id=testquestions.questionbankid
+where candidateanswers.candidateid=6 and testquestions.testid=1;
+
+-- get candidatestresultdetails
+select candidatetestresults.testid,candidatetestresults.score,candidatetestresults.candidateid,
+employees.firstname,employees.lastname,subjects.title as subject
+from candidatetestresults inner join employees on employees.id=candidatetestresults.candidateid
+inner join tests on candidatetestresults.testid=tests.id
+inner join subjects on tests.subjectid=subjects.id
+where candidatetestresults.testid=1;
