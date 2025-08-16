@@ -155,3 +155,23 @@ from candidatetestresults inner join employees
 on employees.id=candidatetestresults.candidateid inner join tests
 on candidatetestresults.testid=tests.id inner join subjects
 on tests.subjectid=subjects.id where candidatetestresults.testid=3;
+
+-- get the appearedcandidates for testid=1
+select candidatetestresults.testid, candidatetestresults.candidateid, employees.firstname, 
+employees.lastname from candidatetestresults 
+inner join employees on employees.id= candidatetestresults.candidateid
+where candidatetestresults.testid=3;
+
+-- get the passedcandidates for testid=1
+select tests.id,candidatetestresults.candidateid,candidatetestresults.score,tests.passinglevel,employees.firstname,employees.lastname
+from tests
+inner join candidatetestresults on tests.id=candidatetestresults.testid
+inner join employees on candidatetestresults.candidateid=employees.id
+where candidatetestresults.score >= tests.passinglevel AND tests.id=1;
+
+-- get the failedcandidates for testid=1
+select tests.id,candidatetestresults.candidateid,candidatetestresults.score,tests.passinglevel,employees.firstname,employees.lastname
+from tests
+inner join candidatetestresults on tests.id=candidatetestresults.testid
+inner join employees on candidatetestresults.candidateid=employees.id
+where candidatetestresults.score < tests.passinglevel AND tests.id=1;
