@@ -191,3 +191,15 @@ from candidatetestresults inner join employees on employees.id=candidatetestresu
 inner join tests on candidatetestresults.testid=tests.id
 inner join subjects on tests.subjectid=subjects.id
 where candidatetestresults.testid=1;
+
+-- get appearedcandidates
+select candidatetestresults.testid, candidatetestresults.candidateid, 
+employees.firstname, employees.lastname
+from candidatetestresults 
+inner join employees 
+on employees.id= candidatetestresults.candidateid
+where candidatetestresults.testid=1;
+
+-- to calculate score of given candidateid and testid;
+call spcandidatetestresult(2,1,@pscore) ;
+select(@pscore);
