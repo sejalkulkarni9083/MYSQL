@@ -203,3 +203,160 @@ where candidatetestresults.testid=1;
 -- to calculate score of given candidateid and testid;
 call spcandidatetestresult(2,1,@pscore) ;
 select(@pscore);
+
+-- give the candidatetestresultdetails
+CALL spcandidatetestresultdetails(3,5, @pcorrectAnswers, @pincorrectAnswers,@pskippedQuestions);
+select @pcorrectAnswers,@pincorrectAnswers,@pskippedQuestions;
+
+-- get interviewdetails where interviewid=2
+call spinterviewdetails(2);
+
+-- Update passing level by testid
+update tests set passinglevel = 5 where id=1;
+update tests set passinglevel=@passinglevel where id =@id;
+
+-- get test results by passing subjectid=1
+select tests.id,tests.subjectid,candidatetestresults.candidateid,employees.firstname,employees.lastname,candidatetestresults.score
+from tests
+inner join candidatetestresults
+on tests.id=candidatetestresults.testid
+inner join employees
+on candidatetestresults.candidateid=employees.id
+where tests.subjectid=2;
+
+
+SELECT t.id,t.name AS TestName, t.smeid AS subjectExpertId, t.subjectid AS subjectId, t.creationdate AS creationDate,t.modificationdate AS modificationDate,
+t.scheduleddate AS scheduledDate,t.status,t.passinglevel,e.firstName, e.lastName
+FROM   tests t
+LEFT JOIN employees e ON t.smeid = e.id 
+WHERE t.id = @AssessmentId;
+
+select score from candidatetestresults where candidateid=@candidateId and testid=@testId;
+
+select * from tests;
+
+INSERT INTO tests(Name,subjectid, duration, smeid, creationdate, modificationdate, scheduleddate, passinglevel) 
+                   VALUES (@Name,@SubjectId, @Duration, @SmeId, @CreationDate, @ModificationDate, @ScheduledDate, @PassingLevel);
+
+select tests.*,subjects.title as skill,employees.firstname,employees.lastname from tests 
+                        inner join subjectmatterexperts on subjectmatterexperts.id=tests.smeid
+                        inner join subjects on subjects.id=subjectmatterexperts.subjectid
+                        inner join employees on  employees.id=subjectmatterexperts.employeeid;
+
+-- give the candidatetestresultdetails
+CALL spcandidatetestresultdetails(3,5, @pcorrectAnswers, @pincorrectAnswers,@pskippedQuestions);
+select @pcorrectAnswers,@pincorrectAnswers,@pskippedQuestions;
+
+-- get interviewdetails where interviewid=2
+call spinterviewdetails(2);
+
+-- Update passing level by testid
+update tests set passinglevel = 5 where id=1;
+update tests set passinglevel=@passinglevel where id =@id;
+
+-- get test results by passing subjectid=1
+select tests.id,tests.subjectid,candidatetestresults.candidateid,employees.firstname,employees.lastname,candidatetestresults.score
+from tests
+inner join candidatetestresults
+on tests.id=candidatetestresults.testid
+inner join employees
+on candidatetestresults.candidateid=employees.id
+where tests.subjectid=2;
+
+
+SELECT t.id,t.name AS TestName, t.smeid AS subjectExpertId, t.subjectid AS subjectId, t.creationdate AS creationDate,t.modificationdate AS modificationDate,
+t.scheduleddate AS scheduledDate,t.status,t.passinglevel,e.firstName, e.lastName
+FROM   tests t
+LEFT JOIN employees e ON t.smeid = e.id 
+WHERE t.id = @AssessmentId;
+
+select score from candidatetestresults where candidateid=@candidateId and testid=@testId;
+
+select * from tests;
+
+INSERT INTO tests(Name,subjectid, duration, smeid, creationdate, modificationdate, scheduleddate, passinglevel) 
+                   VALUES (@Name,@SubjectId, @Duration, @SmeId, @CreationDate, @ModificationDate, @ScheduledDate, @PassingLevel);
+
+select tests.*,subjects.title as skill,employees.firstname,employees.lastname from tests 
+                        inner join subjectmatterexperts on subjectmatterexperts.id=tests.smeid
+                        inner join subjects on subjects.id=subjectmatterexperts.subjectid
+                        inner join employees on  employees.id=subjectmatterexperts.employeeid;
+
+-- give the candidatetestresultdetails
+CALL spcandidatetestresultdetails(3,5, @pcorrectAnswers, @pincorrectAnswers,@pskippedQuestions);
+select @pcorrectAnswers,@pincorrectAnswers,@pskippedQuestions;
+
+-- get interviewdetails where interviewid=2
+call spinterviewdetails(2);
+
+-- Update passing level by testid
+update tests set passinglevel = 5 where id=1;
+update tests set passinglevel=@passinglevel where id =@id;
+
+-- get test results by passing subjectid=1
+select tests.id,tests.subjectid,candidatetestresults.candidateid,employees.firstname,employees.lastname,candidatetestresults.score
+from tests
+inner join candidatetestresults
+on tests.id=candidatetestresults.testid
+inner join employees
+on candidatetestresults.candidateid=employees.id
+where tests.subjectid=2;
+
+
+SELECT t.id,t.name AS TestName, t.smeid AS subjectExpertId, t.subjectid AS subjectId, t.creationdate AS creationDate,t.modificationdate AS modificationDate,
+t.scheduleddate AS scheduledDate,t.status,t.passinglevel,e.firstName, e.lastName
+FROM   tests t
+LEFT JOIN employees e ON t.smeid = e.id 
+WHERE t.id = @AssessmentId;
+
+select score from candidatetestresults where candidateid=@candidateId and testid=@testId;
+
+select * from tests;
+
+INSERT INTO tests(Name,subjectid, duration, smeid, creationdate, modificationdate, scheduleddate, passinglevel) 
+                   VALUES (@Name,@SubjectId, @Duration, @SmeId, @CreationDate, @ModificationDate, @ScheduledDate, @PassingLevel);
+
+select tests.*,subjects.title as skill,employees.firstname,employees.lastname from tests 
+                        inner join subjectmatterexperts on subjectmatterexperts.id=tests.smeid
+                        inner join subjects on subjects.id=subjectmatterexperts.subjectid
+                        inner join employees on  employees.id=subjectmatterexperts.employeeid;
+
+-- give the candidatetestresultdetails
+CALL spcandidatetestresultdetails(3,5, @pcorrectAnswers, @pincorrectAnswers,@pskippedQuestions);
+select @pcorrectAnswers,@pincorrectAnswers,@pskippedQuestions;
+
+-- get interviewdetails where interviewid=2
+call spinterviewdetails(2);
+
+-- Update passing level by testid
+update tests set passinglevel = 5 where id=1;
+update tests set passinglevel=@passinglevel where id =@id;
+
+-- get test results by passing subjectid=1
+select tests.id,tests.subjectid,candidatetestresults.candidateid,employees.firstname,employees.lastname,candidatetestresults.score
+from tests
+inner join candidatetestresults
+on tests.id=candidatetestresults.testid
+inner join employees
+on candidatetestresults.candidateid=employees.id
+where tests.subjectid=2;
+
+
+SELECT t.id,t.name AS TestName, t.smeid AS subjectExpertId, t.subjectid AS subjectId, t.creationdate AS creationDate,t.modificationdate AS modificationDate,
+t.scheduleddate AS scheduledDate,t.status,t.passinglevel,e.firstName, e.lastName
+FROM   tests t
+LEFT JOIN employees e ON t.smeid = e.id 
+WHERE t.id = @AssessmentId;
+
+select score from candidatetestresults where candidateid=@candidateId and testid=@testId;
+
+select * from tests;
+
+INSERT INTO tests(Name,subjectid, duration, smeid, creationdate, modificationdate, scheduleddate, passinglevel) 
+                   VALUES (@Name,@SubjectId, @Duration, @SmeId, @CreationDate, @ModificationDate, @ScheduledDate, @PassingLevel);
+
+select tests.*,subjects.title as skill,employees.firstname,employees.lastname from tests 
+                        inner join subjectmatterexperts on subjectmatterexperts.id=tests.smeid
+                        inner join subjects on subjects.id=subjectmatterexperts.subjectid
+                        inner join employees on  employees.id=subjectmatterexperts.employeeid;
+
