@@ -20,3 +20,6 @@ Update candidatetestresults  set score =pscore where candidateid= pcandidateId a
 END $$
 
 DELIMITER ;
+
+call spcandidatetestresult(1,22,@pscore);
+select(@pscore);
