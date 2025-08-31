@@ -23,3 +23,5 @@ DELIMITER ;
 
 call spcandidatetestresult(1,22,@pscore);
 select(@pscore);
+
+DROP PROCEDURE IF EXISTS spinterviewdetails;
