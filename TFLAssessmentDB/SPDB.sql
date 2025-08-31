@@ -25,3 +25,43 @@ call spcandidatetestresult(1,22,@pscore);
 select(@pscore);
 
 DROP PROCEDURE IF EXISTS spinterviewdetails;
+
+DELIMITER $$
+CREATE PROCEDURE spinterviewdetails(IN pinterviewId INT)
+BEGIN
+    SELECT 
+        interviews.id,
+        interviews.interviewdate,
+        interviews.interviewtime,
+        interviews.smeid,
+        CONCAT(employees.firstname, " ", employees.lastname) AS SmeName,
+        CONCAT(candidates.firstname, " ", candidates.lastname) AS CandidateName,
+        subjects.title AS Subject
+    FROM 
+        interviews
+    INNER JOIN 
+        subjectmatterexperts ON interviews.smeid = subjectmatterexperts.id
+    INNER JOIN 
+        employees ON subjectmatterexperts.employeeid = employees.id
+    LEFT JOIN 
+        employees AS candidates ON interviews.candidateid = candidates.id
+    LEFT JOIN 
+        subjects ON subjectmatterexperts.subjectid = subjects.id
+    WHERE 
+        interviews.id = pinterviewId;
+
+    SELECT 
+        evaluationcriterias.id, 
+        evaluationcriterias.title 
+    FROM 
+        interviews
+    INNER JOIN 
+        interviewcriterias ON interviews.id = interviewcriterias.interviewid
+    INNER JOIN 
+        evaluationcriterias ON interviewcriterias.evaluationcriteriaid = evaluationcriterias.id
+    WHERE 
+        interviews.id = pinterviewId;
+
+END $$
+
+DELIMITER ;
