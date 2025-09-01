@@ -65,3 +65,9 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+-- Call the procedure by passing a dynamic interview ID
+CALL spinterviewdetails(5);
+
+DROP PROCEDURE IF Exists spcandidatetestresultdetails;
+
