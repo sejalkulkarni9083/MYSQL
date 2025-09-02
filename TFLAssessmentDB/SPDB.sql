@@ -102,3 +102,5 @@ WHERE candidateanswers.answerkey="NO" AND candidateanswers.candidateId = pcandid
 SET pcorrectAnswers=correctCandidateAnswers;
 END IF;
 END $$
+
+DELIMITER ;
