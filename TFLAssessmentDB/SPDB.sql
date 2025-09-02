@@ -104,3 +104,7 @@ END IF;
 END $$
 
 DELIMITER ;
+
+CALL spcandidatetestresultdetails(32,2, @pcorrectAnswers, @pincorrectAnswers,@pskippedQuestions);
+
+select @pcorrectAnswers,@pincorrectAnswers,@pskippedQuestions;
