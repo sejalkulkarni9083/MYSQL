@@ -133,3 +133,5 @@ close candidate_result_cursor;
 end $$
 
 call spupdatemarks(1, 13);
+
+DROP PROCEDURE IF Exists spcandidate_performance;
