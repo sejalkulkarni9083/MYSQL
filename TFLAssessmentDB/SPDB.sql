@@ -108,3 +108,28 @@ DELIMITER ;
 CALL spcandidatetestresultdetails(32,2, @pcorrectAnswers, @pincorrectAnswers,@pskippedQuestions);
 
 select @pcorrectAnswers,@pincorrectAnswers,@pskippedQuestions;
+
+DROP PROCEDURE IF Exists spupdatemarks;
+
+DELIMITER $$
+create procedure spupdatemarks(in ptestid int, in markstoraise int)
+begin 
+declare candId int;
+declare marks int;
+
+declare candidate_result_cursor cursor for
+select  score,candidateid from candidatetestresults where testid= ptestid;
+ OPEN  candidate_result_cursor;
+ loop
+     -- Forward only recordset
+
+    FETCH NEXT FROM  candidate_result_cursor INTO marks, candId;
+        SET marks = marks + markstoraise;
+        UPDATE candidatetestresults 
+        SET score = marks
+        WHERE candidateid = candId;
+	end loop;
+close candidate_result_cursor;
+end $$
+
+call spupdatemarks(1, 13);
