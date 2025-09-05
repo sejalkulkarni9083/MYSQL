@@ -168,3 +168,5 @@ begin
      End LOOP;
     close candidate_testresult_cursor;
 end $$
+
+call spcandidate_performance(1);
