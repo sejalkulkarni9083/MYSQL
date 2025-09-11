@@ -196,3 +196,5 @@ END $$
 DELIMITER ;
 
 call spcandidateinterviewperformance(2);
+
+drop procedure if exists spgettestevaluationcriteriapercentage;   
